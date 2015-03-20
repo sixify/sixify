@@ -1,5 +1,5 @@
-import logging
 from feed_grabber import FeedGrabber
+import logging
 import urllib2
 import json
 import time
@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 class BlockChainGrabber(FeedGrabber):
 
     def __init__(self, *args, **kwds):
-        super(, self).__init__(*args, **kwds)
+        super(BlockChainGrabber, self).__init__(*args, **kwds)
 
-    def get_latest_transactions(self, number_of_blocks=12);
+    def get_latest_transactions(self, number_of_blocks=12):
         response = urllib2.urlopen('https://blockchain.info/latestblock')
         last_block = json.load(response)['height']
         txs = []
@@ -21,11 +21,11 @@ class BlockChainGrabber(FeedGrabber):
             response = urllib2.urlopen('https://blockchain.info/rawblock/' + str(last_block))
             block_txs = json.load(response)['tx']
             # remove unneeded data
-            txs_data = map(_filter_data, block_txs)
+            txs_data = map(self._filter_data, block_txs)
             txs += txs_data
         return txs
 
-    def _filter_data(block_tx):
+    def _filter_data(self, block_tx):
         out =  dict(
                 time        = block_tx['time'],
                 size        = block_tx['size'],
