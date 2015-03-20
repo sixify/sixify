@@ -70,7 +70,8 @@ module.exports = function(grunt) {
   	    // ],
   	    dependencies: {
           'bootstrap': 'jquery',
-          'angular': 'jquery'
+          'angular': 'jquery',
+          'dimple': 'd3'
   	      // 'underscore': 'jquery',
   	      // 'backbone': 'underscore',
   	      // 'jquery-mousewheel': 'jquery'
