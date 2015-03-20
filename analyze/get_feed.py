@@ -2,6 +2,9 @@
 import yaml
 import logging
 from pprint import pformat as pretty
+import pandas
+import pandas.io as pio
+from cStringIO import StringIO
 
 
 logger = logging.getLogger('root')
@@ -22,8 +25,13 @@ def setup_logging():
         handler.addFilter(Whitelist('root'))
 
 
+def export_csv(filename, data):
+    logger.info('Exporting JSON into CSV dataframe: %s' % filename)
+    frame = pandas.DataFrame.from_dict(data)
+    frame.to_csv(filename)
+
+
 if __name__ == '__main__':
-    print 'yo!'
     setup_logging()
     # get_bitstamp_feed
     config = dict()
@@ -32,5 +40,5 @@ if __name__ == '__main__':
     from exchanges.bitstamp import BitStampGrabber
     feed_grabber = BitStampGrabber(config)
     trades = feed_grabber.get_pair_trades(pair='BTC/USD')
-    logger.info(pretty(trades))
-
+    # logger.info(pretty(trades))
+    export_csv('input_feeds/sixify_bitstamp_btcusd.csv', trades)
