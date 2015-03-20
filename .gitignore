@@ -52,3 +52,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# web assets
+visualize/assets/bower_components/*
+visualize/assets/node_modules/*
+visualize/assets/dist/*
+

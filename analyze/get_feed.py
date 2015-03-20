@@ -31,14 +31,23 @@ def export_csv(filename, data):
     frame.to_csv(filename)
 
 
-if __name__ == '__main__':
-    setup_logging()
-    # get_bitstamp_feed
-    config = dict()
-    # config = yaml.load(open('config.yaml'))
+def get_bitstamp_btcusd(config):
     logger.info('Start grabbing feed from bitstamp')
     from exchanges.bitstamp import BitStampGrabber
     feed_grabber = BitStampGrabber(config)
     trades = feed_grabber.get_pair_trades(pair='BTC/USD')
     # logger.info(pretty(trades))
     export_csv('input_feeds/sixify_bitstamp_btcusd.csv', trades)
+
+
+def get_forex_yahoo_usdeur(config):
+    '''Get EUR/USD pair trades form yahoo'''
+
+
+if __name__ == '__main__':
+    setup_logging()
+    # get_bitstamp_feed
+    config = dict()
+    # config = yaml.load(open('config.yaml'))
+    # get_bitstamp_btcusd()
+    get_forex_yahoo_usdeur()
