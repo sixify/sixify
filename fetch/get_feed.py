@@ -43,10 +43,10 @@ def get_bitstamp_btcusd(config):
 def get_forex_yahoo_usdeur(config):
     '''Get EUR/USD pair trades form yahoo'''
 
-def get_blockchain_blockchaininfo_transactions(config)
-    from blockchain.blockchain import Blockchain
+def get_blockchaininfo_transactions(config):
+    from blockchain.blockchain import BlockChainGrabber
     feed_grabber = BlockChainGrabber(config)
-    transactions = feed_grabber..get_latest_transactions()
+    transactions = feed_grabber.get_latest_transactions()
     export_csv('../analyze/input_feeds/sixify_blockchaininfo_transactions.csv', transactions)
 
 
@@ -58,3 +58,4 @@ if __name__ == '__main__':
     # config = yaml.load(open('config.yaml'))
     get_bitstamp_btcusd(config)
     get_forex_yahoo_usdeur(config)
+    get_blockchaininfo_transactions(config)
