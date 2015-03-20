@@ -1,11 +1,11 @@
-$(function () {
+$(function () {    
     var seriesOptions = [],
         seriesCounter = 0,
         names = ['MSFT', 'AAPL', 'GOOG'],
         // create the chart when all data is loaded
         createChart = function () {
 
-            $('#container').highcharts('StockChart', {
+            $('#inputfeeds-container').highcharts('StockChart', {
 
                 credits: false,
 

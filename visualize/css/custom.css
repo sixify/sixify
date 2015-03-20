@@ -1,0 +1,24 @@
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.free-border, .free-border-browse {
+	padding: 20px;
+	margin: 20px 0;	
+	border: 1px solid #eee;
+	border-radius: 3px;	
+	border-left-width: 5px;
+}
+
+.free-border {
+	border-left-color: #d9534f;
+}
+
+.free-border-browse {
+	border-left: 3px solid !important;
+	border-left-color: #87CEEB !important;
+	padding: 10px;
+}
