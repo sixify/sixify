@@ -1,0 +1,3 @@
+[submodule "git/bitstamp-api"]
+	path = git/bitstamp-api
+	url = https://github.com/kmadac/bitstamp-python-client
