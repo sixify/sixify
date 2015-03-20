@@ -37,7 +37,7 @@ def get_bitstamp_btcusd(config):
     feed_grabber = BitStampGrabber(config)
     trades = feed_grabber.get_pair_trades(pair='BTC/USD')
     # logger.info(pretty(trades))
-    export_csv('input_feeds/sixify_bitstamp_btcusd.csv', trades)
+    export_csv('../analyze/input_feeds/sixify_bitstamp_btcusd.csv', trades)
 
 
 def get_forex_yahoo_usdeur(config):
@@ -49,5 +49,5 @@ if __name__ == '__main__':
     # get_bitstamp_feed
     config = dict()
     # config = yaml.load(open('config.yaml'))
-    # get_bitstamp_btcusd()
-    get_forex_yahoo_usdeur()
+    get_bitstamp_btcusd(config)
+    get_forex_yahoo_usdeur(config)
