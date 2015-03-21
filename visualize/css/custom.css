@@ -13,8 +13,12 @@
 	border-left-width: 5px;
 }
 
-.free-border {
+.free-border-1 {
 	border-left-color: #d9534f;
+}
+
+.fee-border-2 {
+	border-left-color: #2c7fb8;
 }
 
 .free-border-browse {
