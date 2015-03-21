@@ -10,7 +10,7 @@ read_folder <- "C://Users//Vardan//Documents//GitHub//sixify//analyze//"
 
 #read_file <- "D:\\github\\demo\\input_feeds\\sixify_bitstamp_btcusd.csv"
 
-save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_cexio_btcusd")#bitstamp btce cexio
+save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_aggregate_btcusd")#bitstamp btce cexio
 
 inputPath = file.path(read_folder,"input_feeds","exchanges")
 
@@ -28,8 +28,10 @@ data_table4 = read.table(file.path(read_folder,"input_feeds","exchanges",fileLis
 
 
 aggrTable = merge(merge(merge(data_table1,data_table2,all = TRUE), data_table3,all = TRUE),data_table4, all = TRUE) 
-calcTable = data_table3
+calcTable = aggrTable
 
+options(scipen=9999999999999999999999999999999)
+save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_aggregate_btcusd")
 #   
 # 
 # 
@@ -60,9 +62,9 @@ binned_data_geomean <- data.frame(price = geomean_price, amount = geomean_amount
 
 
 # save csv
-# 
+
 # write.table(binned_data_geomean, file = paste(save_file_geomean, "csv", sep = ".", collapse = NULL), append=F, row.names=F, col.names=F,  sep=",")
-# 
+
  
 # save json
 binned_data_geomean = na.omit(binned_data_geomean)
