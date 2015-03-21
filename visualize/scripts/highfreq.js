@@ -9,6 +9,10 @@ $(function () {
                 
                     credits: false,
 
+                    title: {
+                        text: "",
+                    },
+
                     // tooltip: {
                     //     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
                     //     valueDecimals: 2
