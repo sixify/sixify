@@ -1,6 +1,12 @@
 $(function () {    
     var seriesOptions = [],
-        seriesCounter = 0,        
+        seriesCounter = 0,
+        parseName = function(filename) {            
+            var re = new RegExp("_(.*?).txt");
+            var res = filename.match(re);
+            // console.log(res[1]);
+            return res[1];
+        },
         // create the chart when all data is loaded
         createChart = function () {
 
@@ -10,7 +16,18 @@ $(function () {
                     credits: false,
 
                     title: {
-                        text: "Distributed market prices vs. avarage ",
+                        text: "Distributed market prices vs. relative strength",
+                    },
+
+                    xAxis: {
+                        type: "datetime",
+                    },
+
+                    labels: {
+                        formatter: function() {
+                            // return Highcharts.dateFormat('%a %d %b', this.value);
+                            return Highcharts.dateFormat('%H:%M:%S', this.value);
+                        }
                     },
 
                     // tooltip: {
@@ -76,9 +93,11 @@ $(function () {
     $.getJSON('data/sixify_highfreq.json', function (series_files) {        
         $.each(series_files, function (i, series_name) {
             $.getJSON(series_name, function (data) {
-                console.log(series_name);
-                console.log(data);
+                // console.log(series_name);
+
+                // console.log(data);
                 var series = {
+                    name: parseName(series_name),
                     data: data['price']
                 };
                 seriesOptions.push(series);
@@ -91,24 +110,6 @@ $(function () {
             });
         });
     })
-    // $.each(names, function (i, name) {
-
-    //     $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?',    function (data) {
-
-    //         seriesOptions[i] = {
-    //             name: name,
-    //             data: data
-    //         };
-
-    //         // As we're loading the data asynchronously, we don't know what order it will arrive. So
-    //         // we keep a counter and create the chart when all the data is loaded.
-    //         seriesCounter += 1;
-
-    //         if (seriesCounter === names.length) {
-    //             createChart();
-    //         }
-    //     });
-    // });
 });
 
 

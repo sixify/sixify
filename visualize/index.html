@@ -39,9 +39,9 @@
 
       <ul id="visual-tabs" class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#ai">Awesome Index</a></li>
-        <!-- <li role="presentation"><a href="#highfreq">High-frequency Bitcoin</a></li>
+        <li role="presentation"><a href="#highfreq">High-frequency Bitcoin</a></li>
         <li role="presentation"><a href="#forex">FOREX trends</a></li>
-        <li role="presentation"><a href="#payment_clustering">Payment clustering</a></li> -->
+        <li role="presentation"><a href="#payment_clustering">Payment clustering</a></li>
       </ul>
     
       <br>
@@ -84,10 +84,16 @@
     <script src="scripts/highfreq.js"></script>
     <script src="scripts/forex.js"></script>
     <script type="text/javascript"> <!--
-      // jQuery( document ).ready(function( $ ) {
-      //   $("[data-toggle='tooltip']").tooltip();
-      //   $("[data-toggle='dropdown']").dropdown();
-      // });
+      jQuery( document ).ready(function( $ ) {
+        // $("[data-toggle='tooltip']").tooltip();
+        // $("[data-toggle='dropdown']").dropdown();
+        $("[data-highcharts-chart]").each(function () {
+            var highChart = Highcharts.charts[$(this).data('highchartsChart')];
+            var highChartCont = $(highChart.container).parent();
+            highChart.setSize(highChartCont.width(), highChartCont.height());
+            highChart.hasUserSize = undefined;
+        });
+      });
     -->
     </script>
   </body>
