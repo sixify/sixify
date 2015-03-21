@@ -38,8 +38,8 @@
       <br><br>
 
       <ul id="visual-tabs" class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#inputfeeds">Input feeds</a></li>
-        <li role="presentation"><a href="#aggregated_indicators">Aggregated indicators</a></li>
+        <li role="presentation" class="active"><a href="#highfreq">High-frequency Bitcoin</a></li>
+        <li role="presentation"><a href="#forex">FOREX trends</a></li>
         <li role="presentation"><a href="#payment_clustering">Payment clustering</a></li>
         <li role="presentation"><a href="#btcd">BTCD</a></li>
       </ul>
@@ -47,23 +47,33 @@
       <br>
       
       <div class="tab-content">
-        <div id="inputfeeds" class="tab-pane fade in active">          
-          <h2 class="featurette-heading free-border">Input feeds from multiple crypto coin exchanges <span class="text-muted">these sources are pretty variable</span></h2>
-          <div id="inputfeeds-container" style="height: 400px; min-width: 310px"></div>
+
+        <!-- High Freq story -->
+        <div id="highfreq" class="tab-pane fade in active">          
+          <h2 class="featurette-heading free-border">Input feeds from multiple crypto coin exchanges <span class="text-muted">augmented with custom indicators</span></h2>
+          <div id="highfreq-container" style="height: 400px; min-width: 310px"></div>
         </div>
      
+        <!-- Forex story -->
+        <div id="forex" class="tab-pane fade in active">
+          <h2 class="featurette-heading free-border">Input feeds from multiple crypto coin exchanges <span class="text-muted">augmented with custom indicators</span></h2>
+          <div id="forex-container" style="height: 400px; min-width: 310px"></div>
+        </div>
+
       
-      <hr>
-      <footer class="footer">
-        <p>© <a href="http://sixify.github.com/">SIXIFY 2015</a> :: <a href="http://sixify.github.com/">#SIXHackathon2015</a></p>
-      </footer>
+        <hr>
+
+        <footer class="footer">
+          <p>© <a href="http://sixify.github.com/">SIXIFY 2015</a> :: <a href="http://sixify.github.com/">#SIXHackathon2015</a></p>
+        </footer>
     </div>
 
     <script src="assets/sixify/js/sixify-assets.min.js"></script>
     <script src="scripts/dimple.v2.1.2.min.js"></script>
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-    <script src="scripts/linepanel.js"></script>
+    <script src="scripts/highfreq.js"></script>
+    <script src="scripts/forex.js"></script>
     <script type="text/javascript"> <!--
       // jQuery( document ).ready(function( $ ) {
       //   $("[data-toggle='tooltip']").tooltip();
