@@ -17,7 +17,6 @@ $(function () {
                     series: seriesOptions,
                 });
 
-
                 // the button action
                 var chart = $('#container').highcharts(),
                     $button = $('#button');
