@@ -22,8 +22,8 @@ class Whitelist(logging.Filter):
 def setup_logging():
     FORMAT = '[%(asctime)-15s] %(name)23s: %(message)s'
     logging.basicConfig(format=FORMAT, level=logging.DEBUG)
-    for handler in logging.root.handlers:
-        handler.addFilter(Whitelist('root'))
+    # for handler in logging.root.handlers:
+    #     handler.addFilter(Whitelist('root', 'exchanges.cexio'))
 
 
 def export_csv(filename, data):
@@ -76,16 +76,45 @@ def get_kraken_btcusd(config):
            ' > ../analyze/input_feeds/sixify_kraken_btcusd.csv')
 
 
-if __name__ == '__main__':
-    setup_logging()
-    # get_bitstamp_feed
+def get_cexio_btcusd(config, pair='btcusd'):
+    exchange = 'cexio'
+    from exchanges.cexio import CexioGrabber
+    grabber = CexioGrabber(config)
+    trades = grabber.get_pair_trades(pair='BTC/USD')
+    # logger.info(pretty(trades))
+    csv_filename = '../analyze/input_feeds/sixify_%s_%s.csv' % \
+                   (exchange, pair)
+    export_csv(csv_filename, trades)
+
+
+def get_btce_btcusd(config, pair='btcusd'):
+    exchange = 'btce'
+    from exchanges.btce import BtceGrabber
+    grabber = BtceGrabber(config)
+    trades = grabber.get_pair_trades(pair='BTC/USD')
+    # logger.info(pretty(trades))
+    csv_filename = '../analyze/input_feeds/sixify_%s_%s.csv' % \
+                   (exchange, pair)
+    export_csv(csv_filename, trades)
+
+
+def mine_stock_feeds():
+    '''Get latest high-frequent exchange rates data from stocks API.'''
     config = dict()
     # config = yaml.load(open('config.yaml'))
-    # get_bitstamp_btcusd(config)
-    # get_forex_yahoo_usdeur(config)
-    # get_blockchaininfo_transactions(config)
-    # get_bitcoinavarage_btcusd(config)
-    # get_bitcoinavarage_volumes(config)
+    get_bitstamp_btcusd(config)
+    get_forex_yahoo_usdeur(config)
+    get_blockchaininfo_transactions(config)
+    get_bitcoinavarage_btcusd(config)
+    get_bitcoinavarage_volumes(config)
     get_okcoin_btcusd(config)
     get_kraken_btcusd(config)
+    get_cexio_btcusd(config)
+    get_btce_btcusd(config)
+
+
+if __name__ == '__main__':
+    setup_logging()
+    mine_stock_feeds()
+
 
