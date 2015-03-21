@@ -29,7 +29,7 @@ data_table4 = read.table(file.path(read_folder,"input_feeds","exchanges",fileLis
 
 aggrTable = merge(merge(merge(data_table1,data_table2,all = TRUE), data_table3,all = TRUE),data_table4, all = TRUE) 
 calcTable = aggrTable
-options(scipen=999999999999999999999)
+
 save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_aggregation_btcusd")
 #   
 # 
@@ -42,12 +42,12 @@ save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_aggre
 # 
 # 
 # 
-time_bin <- 5*60 # 5 min
+time_bin <- 1*60 # 5 min
 
 #new_timestamps <- seq(min(data_table$date),max(data_table$date)-time_bin,time_bin)
 
 
-bin_boundaries <- seq(min(aggrTable$date)+time_bin,max(aggrTable$date)-time_bin,time_bin)
+bin_boundaries <- seq(min(calcTable$date)+time_bin,max(calcTable$date)-time_bin,time_bin)
 
 
 geomean_price = tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)
@@ -59,15 +59,17 @@ geomean_amount = tapply(calcTable$amount, cut(calcTable$date, breaks = bin_bound
 # 
 binned_data_geomean <- data.frame(price = geomean_price, amount = geomean_amount, date = bin_boundaries[1:length(bin_boundaries)-1])
 
+binned_data_geomean = format(na.omit(binned_data_geomean),scientific=FALSE)
 
 # save csv
 
-write.table(binned_data_geomean, file = paste(save_file_geomean, "csv", sep = ".", collapse = NULL), append=F, row.names=F, col.names=F,  sep=",")
-
+# write.table(binned_data_geomean, file = paste(save_file_geomean, "csv", sep = ".", collapse = NULL), append=F, row.names=F, col.names=F,  sep=",")
+write.table(format(binned_data_geomean, scientific=FALSE), file = paste(save_file_geomean, "csv", sep = ".", collapse = NULL), append=F, row.names=F, col.names=F,  sep=",")
  
 # save json
-binned_data_geomean = na.omit(binned_data_geomean)
- 
+
+#  
  sink(paste(save_file_geomean, "txt", sep = ".", collapse = NULL))
  cat(toJSON(binned_data_geomean))
  sink()
+
