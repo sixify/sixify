@@ -128,5 +128,3 @@ def mine_stock_feeds():
 if __name__ == '__main__':
     setup_logging()
     mine_stock_feeds()
-
-

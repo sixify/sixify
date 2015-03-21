@@ -75,9 +75,20 @@ $(function () {
         };
 
     $.getJSON('data/sixify_highfreq.json', function (series_files) {        
-        $.each(series_files, function (i, series_name) {            
+        $.each(series_files, function (i, series_name) {
             $.getJSON(series_name, function (data) {
-                console.log(data)
+                console.log(series_name);
+                console.log(data);
+                var series = {
+                    data: data['price']
+                };
+                seriesOptions.push(series);
+                seriesCounter += 1;
+
+                if (seriesCounter === series_files.length) {
+                    console.log('create chart');
+                    createChart();
+                }
             });
         });
     })
