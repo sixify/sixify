@@ -9,3 +9,6 @@ init:
 
 update:
 		git pull && git submodule foreach --recursive git pull
+
+datajson:
+		python list_data.py sixify_highfreq.json
