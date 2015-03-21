@@ -10,7 +10,7 @@ read_folder <- "C://Users//Vardan//Documents//GitHub//sixify//analyze//"
 
 #read_file <- "D:\\github\\demo\\input_feeds\\sixify_bitstamp_btcusd.csv"
 
-save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_aggregate_btcusd")#bitstamp btce cexio
+save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_cexio_btcusd")#bitstamp btce cexio
 
 inputPath = file.path(read_folder,"input_feeds","exchanges")
 
@@ -28,23 +28,9 @@ data_table4 = read.table(file.path(read_folder,"input_feeds","exchanges",fileLis
 
 
 aggrTable = merge(merge(merge(data_table1,data_table2,all = TRUE), data_table3,all = TRUE),data_table4, all = TRUE) 
-calcTable = aggrTable
+calcTable = data_table3
 
 #   
-# # if (i == 1)
-# # {
-#   aggrTable = data.frame(amount = data_table$amount , price = data_table$price ,  date = data_table$date) 
-# # }
-# # else
-# # {
-# tmp  = data.frame(amount = data_table$amount , price = data_table$price ,  date = data_table$date) 
-#  = merge(aggrTable, tmp,all = TRUE)
-# 
-# # }
-# # 
-# # rm(data_table)
-# 
-# }
 # 
 # 
 # 
@@ -63,10 +49,10 @@ time_bin <- 5*60 # 5 min
 bin_boundaries <- seq(min(aggrTable$date)+time_bin,max(aggrTable$date)-time_bin,time_bin)
 
 
-A = tapply(aggrTable$price, cut(aggrTable$date, breaks = bin_boundaries), geometric.mean)
-
-geomean_price <- as.numeric(A[(1:length(tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)))])
-geomean_amount <- as.numeric(A[(1:length(tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)))])
+geomean_price = tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)
+geomean_amount = tapply(calcTable$amount, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)
+# geomean_price <- as.numeric(A[(1:length(tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)))])
+# geomean_amount <- as.numeric(A[(1:length(tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)))])
 
 
 # 
