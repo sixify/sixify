@@ -36,17 +36,10 @@
       </div>
 
       <br><br>
-
-      <ul id="visual-tabs" class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#ai">Awesome Index</a></li>
-        <li role="presentation"><a href="#highfreq">High-frequency Bitcoin</a></li>
-        <li role="presentation"><a href="#forex">FOREX trends</a></li>
-        <li role="presentation"><a href="#payment_clustering">Payment clustering</a></li>
-      </ul>
     
       <br>
       
-      <div class="tab-content">
+			<div>
 
         <!-- Awesome index (AI) -->
         <div id="ai" class="tab-pane fade in active">
@@ -55,7 +48,7 @@
         </div>
 
         <!-- High Freq story -->
-        <div id="highfreq" class="tab-pane fade">          
+				<div id="highfreq">
           <h2 class="featurette-heading free-border free-border-1">Input feeds from multiple crypto coin exchanges <span class="text-muted">augmented with custom indicators</span></h2>
           <div id="highfreq-container" style="height: 400px; min-width: 310px"></div>
           <br>
@@ -63,7 +56,7 @@
         </div>
      
         <!-- Forex story -->
-        <div id="forex" class="tab-pane fade">
+				<div id="forex">
           <h2 class="featurette-heading free-border">Input feeds from multiple crypto coin exchanges <span class="text-muted">augmented with custom indicators</span></h2>
           <div id="forex-container" style="height: 400px; min-width: 310px"></div>
         </div>
@@ -79,7 +72,7 @@
     <script src="scripts/dimple.v2.1.2.min.js"></script>
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-    <script src="scripts/tabs.js"></script>
+    <!-- <script src="scripts/tabs.js"></script> -->
     <script src="scripts/ai.js"></script>
     <script src="scripts/highfreq.js"></script>
     <script src="scripts/forex.js"></script>
@@ -87,12 +80,12 @@
       jQuery( document ).ready(function( $ ) {
         // $("[data-toggle='tooltip']").tooltip();
         // $("[data-toggle='dropdown']").dropdown();
-        $("[data-highcharts-chart]").each(function () {
-            var highChart = Highcharts.charts[$(this).data('highchartsChart')];
-            var highChartCont = $(highChart.container).parent();
-            highChart.setSize(highChartCont.width(), highChartCont.height());
-            highChart.hasUserSize = undefined;
-        });
+        // $("[data-highcharts-chart]").each(function () {
+        //     var highChart = Highcharts.charts[$(this).data('highchartsChart')];
+        //     var highChartCont = $(highChart.container).parent();
+        //     highChart.setSize(highChartCont.width(), highChartCont.height());
+        //     highChart.hasUserSize = undefined;
+        // });
       });
     -->
     </script>
