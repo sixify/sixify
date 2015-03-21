@@ -9,6 +9,7 @@ if not os.path.exists(AUTH_YAML):
 auth = yaml.load(open(AUTH_YAML))
 print auth
 
+
 class TwitterAuth:
     # Go to http://dev.twitter.com and create an app.
     # The consumer key and secret will be generated for you after

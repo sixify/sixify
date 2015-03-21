@@ -5,6 +5,7 @@ from pprint import pformat as pretty
 import pandas
 import pandas.io as pio
 from cStringIO import StringIO
+from utils import invoke
 
 
 logger = logging.getLogger('root')
@@ -21,8 +22,8 @@ class Whitelist(logging.Filter):
 def setup_logging():
     FORMAT = '[%(asctime)-15s] %(name)23s: %(message)s'
     logging.basicConfig(format=FORMAT, level=logging.DEBUG)
-    for handler in logging.root.handlers:
-        handler.addFilter(Whitelist('root'))
+    # for handler in logging.root.handlers:
+    #     handler.addFilter(Whitelist('root', 'exchanges.cexio'))
 
 
 def export_csv(filename, data):
@@ -43,19 +44,77 @@ def get_bitstamp_btcusd(config):
 def get_forex_yahoo_usdeur(config):
     '''Get EUR/USD pair trades form yahoo'''
 
+
 def get_blockchaininfo_transactions(config):
     from blockchain.blockchain import BlockChainGrabber
     feed_grabber = BlockChainGrabber(config)
     transactions = feed_grabber.get_latest_transactions()
-    export_csv('../analyze/input_feeds/sixify_blockchaininfo_transactions.csv', transactions)
+    export_csv('../analyze/input_feeds/sixify_blockchaininfo_'
+               'transactions.csv', transactions)
 
 
+def get_bitcoinavarage_btcusd(config):
+    invoke('curl -L https://api.bitcoinaverage.com/history/USD/'
+           'per_minute_24h_sliding_window.csv > ../analyze/input'
+           '_feeds/sixify_bitcoinavarage_minslidewin24.csv')
 
-if __name__ == '__main__':
-    setup_logging()
-    # get_bitstamp_feed
+
+def get_bitcoinavarage_volumes(config):
+    invoke('curl -L https://api.bitcoinaverage.com/history/USD/'
+           'volumes.csv > ../analyze/input_feeds/sixify_bitcoina'
+           'varage_volumes.csv')
+
+
+def get_okcoin_btcusd(config):
+    invoke('curl -kL https://www.okcoin.com/api/v1/trades.do\?symbol\='
+           'btc_usd > ../analyze/input_feeds/sixify_'
+           'okcoin_btcusd.csv')
+
+
+def get_kraken_btcusd(config):
+    invoke('curl -kL https://api.kraken.com/0/public/Trades\?pair\=XBTUSD'
+           ' > ../analyze/input_feeds/sixify_kraken_btcusd.csv')
+
+
+def get_cexio_btcusd(config, pair='btcusd'):
+    exchange = 'cexio'
+    from exchanges.cexio import CexioGrabber
+    grabber = CexioGrabber(config)
+    trades = grabber.get_pair_trades(pair='BTC/USD')
+    # logger.info(pretty(trades))
+    csv_filename = '../analyze/input_feeds/sixify_%s_%s.csv' % \
+                   (exchange, pair)
+    export_csv(csv_filename, trades)
+
+
+def get_btce_btcusd(config, pair='btcusd'):
+    exchange = 'btce'
+    from exchanges.btce import BtceGrabber
+    grabber = BtceGrabber(config)
+    trades = grabber.get_pair_trades(pair='BTC/USD')
+    # logger.info(pretty(trades))
+    csv_filename = '../analyze/input_feeds/sixify_%s_%s.csv' % \
+                   (exchange, pair)
+    export_csv(csv_filename, trades)
+
+
+def mine_stock_feeds():
+    '''Get latest high-frequent exchange rates data from stocks API.'''
     config = dict()
     # config = yaml.load(open('config.yaml'))
     get_bitstamp_btcusd(config)
     get_forex_yahoo_usdeur(config)
     get_blockchaininfo_transactions(config)
+    get_bitcoinavarage_btcusd(config)
+    get_bitcoinavarage_volumes(config)
+    get_okcoin_btcusd(config)
+    get_kraken_btcusd(config)
+    get_cexio_btcusd(config)
+    get_btce_btcusd(config)
+
+
+if __name__ == '__main__':
+    setup_logging()
+    mine_stock_feeds()
+
+
