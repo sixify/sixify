@@ -5,6 +5,7 @@ from pprint import pformat as pretty
 import pandas
 import pandas.io as pio
 from cStringIO import StringIO
+from utils import invoke
 
 
 logger = logging.getLogger('root')
@@ -52,11 +53,24 @@ def get_blockchaininfo_transactions(config):
                'transactions.csv', transactions)
 
 
+def get_bitcoinavarage_transactions(config):
+    invoke('curl -L https://api.bitcoinaverage.com/history/USD/'
+           'per_minute_24h_sliding_window.csv > ../analyze/input'
+           '_feeds/sixify_bitcoinavarage_minslidewin24.csv')
+
+def get_bitcoinavarage_volumes(config):
+    invoke('curl -L https://api.bitcoinaverage.com/history/USD/'
+           'volumes.csv > ../analyze/input_feeds/sixify_bitcoina'
+           'varage_volumes.csv')
+
+
 if __name__ == '__main__':
     setup_logging()
     # get_bitstamp_feed
     config = dict()
     # config = yaml.load(open('config.yaml'))
-    get_bitstamp_btcusd(config)
-    get_forex_yahoo_usdeur(config)
-    get_blockchaininfo_transactions(config)
+    # get_bitstamp_btcusd(config)
+    # get_forex_yahoo_usdeur(config)
+    # get_blockchaininfo_transactions(config)
+    get_bitcoinavarage_transactions(config)
+    get_bitcoinavarage_volumes(config)
