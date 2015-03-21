@@ -10,7 +10,7 @@ read_folder <- "C://Users//Vardan//Documents//GitHub//sixify//analyze//"
 
 #read_file <- "D:\\github\\demo\\input_feeds\\sixify_bitstamp_btcusd.csv"
 
-save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_bitstamp_btcusd")#bitstamp btce cexio
+save_file_geomean <- file.path(read_folder,"..","visualize","data","sixify_aggregate_btcusd")#bitstamp btce cexio
 
 inputPath = file.path(read_folder,"input_feeds","exchanges")
 
@@ -63,10 +63,10 @@ time_bin <- 5*60 # 5 min
 bin_boundaries <- seq(min(aggrTable$date)+time_bin,max(aggrTable$date)-time_bin,time_bin)
 
 
-A = tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)
+A = tapply(aggrTable$price, cut(aggrTable$date, breaks = bin_boundaries), geometric.mean)
 
-geomean_price <- as.numeric(A[(1:length(tapply(calcTable$price, cut(aggrTable$date, breaks = bin_boundaries), geometric.mean)))])
-geomean_amount <- as.numeric(A[(1:length(tapply(calcTable$price, cut(aggrTable$date, breaks = bin_boundaries), geometric.mean)))])
+geomean_price <- as.numeric(A[(1:length(tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)))])
+geomean_amount <- as.numeric(A[(1:length(tapply(calcTable$price, cut(calcTable$date, breaks = bin_boundaries), geometric.mean)))])
 
 
 # 
