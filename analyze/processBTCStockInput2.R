@@ -4,30 +4,40 @@ library(fields)
 library(rjson)
 library(plyr)
 
+
+read_folder <- "D:\\github\\demo\\input_feeds"
+
 read_file <- "D:\\github\\demo\\input_feeds\\sixify_bitstamp_btcusd.csv"
 
-save_file_mean <- "D:\\github\\sixify\\visualize\\data\\r\\sixify_mean_btcusd"
-save_file_sd <- "D:\\github\\sixify\\visualize\\data\\r\\sixify_sd_btcusd_sd"
+save_file_mean <- "D:\\github\\sixify\\visualize\\data\\sixify_bitstampmean_btcusd"
+save_file_sd <- "D:\\github\\sixify\\visualize\\data\\sixify_bitstampsd_btcusd"
+
+file_list <- list.files(path = read_folder, pattern = ".*.csv", all.files = FALSE, full.names = FALSE, recursive = FALSE, ignore.case = FALSE, include.dirs = FALSE, no.. = FALSE)
+
+
 
 data_table = read.table(read_file, sep=",", header=T)
 
 # convert timestamp
 time_bin <- 5*60 # 5 min
 
+#new_timestamps <- seq(min(data_table$date),max(data_table$date)-time_bin,time_bin)
+bin_boundaries <- seq(min(data_table$date)+time_bin,max(data_table$date)-time_bin,time_bin)
+
 #as.numeric(dim(data_table)[1])
 
-number_of_bins <-  (max(data_table$date) - min(data_table$date)) / time_bin
+number_of_bins <- length(new_timestamps) #(max(data_table$date) - min(data_table$date)) / time_bin
 
-binned_price <- stats.bin(data_table$date, data_table$price, N = number_of_bins, breaks = NULL)
+binned_price <- stats.bin(data_table$date, data_table$price,  breaks = bin_boundaries)
 
-binned_amount <- stats.bin(data_table$date, data_table$amount, N = number_of_bins, breaks = NULL)
+binned_amount <- stats.bin(data_table$date, data_table$amount,  breaks = bin_boundaries)
 
-binned_tid <- stats.bin(data_table$date, data_table$tid, N = number_of_bins, breaks = NULL)
+binned_tid <- stats.bin(data_table$date, data_table$tid,  breaks = bin_boundaries)
 
 
-binned_data_mean <- data.frame(binned_price$stats[ c("mean"),], binned_amount$stats[ c("mean"),], binned_tid$stats[ c("mean"),])
+binned_data_mean <- data.frame(binned_price$stats[ c("mean"),], binned_amount$stats[ c("mean"),], binned_tid$stats[ c("mean"),], date = bin_boundaries[1:length(bin_boundaries)-1])
 
-binned_data_sd <- data.frame(binned_price$stats[ c("Std.Dev."),], binned_amount$stats[ c("Std.Dev."),], binned_tid$stats[ c("Std.Dev."),])
+binned_data_sd <- data.frame(binned_price$stats[ c("Std.Dev."),], binned_amount$stats[ c("Std.Dev."),], binned_tid$stats[ c("Std.Dev."),], date = bin_boundaries[1:length(bin_boundaries)-1])
 
 
 binned_data_mean <- rename(binned_data_mean, c("binned_price.stats.c..mean....."="price", "binned_amount.stats.c..mean....."="amount", "binned_tid.stats.c..mean....."="tid"))
