@@ -14,7 +14,7 @@
   // add default url hash, if it's not set
   var hash = window.location.hash;
   if(!hash) {
-    window.location.hash = 'highfreq';
+    window.location.hash = 'ai';
   }
 
   // switch to the currently selected tab using current url hash

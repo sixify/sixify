@@ -38,17 +38,24 @@
       <br><br>
 
       <ul id="visual-tabs" class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#highfreq">High-frequency Bitcoin</a></li>
+        <li role="presentation" class="active"><a href="#ai">Awesome Index</a></li>
+        <!-- <li role="presentation"><a href="#highfreq">High-frequency Bitcoin</a></li>
         <li role="presentation"><a href="#forex">FOREX trends</a></li>
-        <li role="presentation"><a href="#payment_clustering">Payment clustering</a></li>
+        <li role="presentation"><a href="#payment_clustering">Payment clustering</a></li> -->
       </ul>
     
       <br>
       
       <div class="tab-content">
 
+        <!-- Awesome index (AI) -->
+        <div id="ai" class="tab-pane fade in active">
+          <h2 class="featurette-heading free-border free-border-2">Live feed of the index is accessible via ticker API <span class="text-muted">(mock)</span></h2>
+          <div id="ai-container" style="height: 400px; min-width: 310px"></div>
+        </div>
+
         <!-- High Freq story -->
-        <div id="highfreq" class="tab-pane fade in active">          
+        <div id="highfreq" class="tab-pane fade">          
           <h2 class="featurette-heading free-border free-border-1">Input feeds from multiple crypto coin exchanges <span class="text-muted">augmented with custom indicators</span></h2>
           <div id="highfreq-container" style="height: 400px; min-width: 310px"></div>
           <br>
@@ -60,8 +67,7 @@
           <h2 class="featurette-heading free-border">Input feeds from multiple crypto coin exchanges <span class="text-muted">augmented with custom indicators</span></h2>
           <div id="forex-container" style="height: 400px; min-width: 310px"></div>
         </div>
-
-      
+              
         <hr>
 
         <footer class="footer">
@@ -74,6 +80,7 @@
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
     <script src="scripts/tabs.js"></script>
+    <script src="scripts/ai.js"></script>
     <script src="scripts/highfreq.js"></script>
     <script src="scripts/forex.js"></script>
     <script type="text/javascript"> <!--

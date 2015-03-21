@@ -10,7 +10,7 @@ $(function () {
                     credits: false,
 
                     title: {
-                        text: "",
+                        text: "Distributed market prices vs. avarage ",
                     },
 
                     // tooltip: {
