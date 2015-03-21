@@ -53,15 +53,27 @@ def get_blockchaininfo_transactions(config):
                'transactions.csv', transactions)
 
 
-def get_bitcoinavarage_transactions(config):
+def get_bitcoinavarage_btcusd(config):
     invoke('curl -L https://api.bitcoinaverage.com/history/USD/'
            'per_minute_24h_sliding_window.csv > ../analyze/input'
            '_feeds/sixify_bitcoinavarage_minslidewin24.csv')
+
 
 def get_bitcoinavarage_volumes(config):
     invoke('curl -L https://api.bitcoinaverage.com/history/USD/'
            'volumes.csv > ../analyze/input_feeds/sixify_bitcoina'
            'varage_volumes.csv')
+
+
+def get_okcoin_btcusd(config):
+    invoke('curl -kL https://www.okcoin.com/api/v1/trades.do\?symbol\='
+           'btc_usd > ../analyze/input_feeds/sixify_'
+           'okcoin_btcusd.csv')
+
+
+def get_kraken_btcusd(config):
+    invoke('curl -kL https://api.kraken.com/0/public/Trades\?pair\=XBTUSD'
+           ' > ../analyze/input_feeds/sixify_kraken_btcusd.csv')
 
 
 if __name__ == '__main__':
@@ -72,5 +84,8 @@ if __name__ == '__main__':
     # get_bitstamp_btcusd(config)
     # get_forex_yahoo_usdeur(config)
     # get_blockchaininfo_transactions(config)
-    get_bitcoinavarage_transactions(config)
-    get_bitcoinavarage_volumes(config)
+    # get_bitcoinavarage_btcusd(config)
+    # get_bitcoinavarage_volumes(config)
+    get_okcoin_btcusd(config)
+    get_kraken_btcusd(config)
+

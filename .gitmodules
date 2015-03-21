@@ -1,3 +1,9 @@
 [submodule "git/bitstamp-api"]
 	path = git/bitstamp-api
 	url = https://github.com/kmadac/bitstamp-python-client
+[submodule "git/cexio-api"]
+	path = git/cexio-api
+	url = https://github.com/matveyco/cex.io-api-python.git
+[submodule "git/btce-api"]
+	path = git/btce-api
+	url = https://github.com/alanmcintyre/btce-api.git
