@@ -40,7 +40,7 @@ $(function () {
             });
         };
 
-        $.getJSON('data/sixify_forex.json', function (data) {
+        $.getJSON('data/sixify_forex2.json', function (data) {
 
 					var maxPairs = 15;
 					var pairsCount = 0;
